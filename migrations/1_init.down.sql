@@ -1,0 +1,8 @@
+BEGIN;
+
+DROP TABLE users;
+DROP TABLE videos;
+DROP TABLE comments;
+DROP TABLE likes;
+
+COMMIT;

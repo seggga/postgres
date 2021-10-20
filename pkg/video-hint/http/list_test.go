@@ -44,7 +44,7 @@ func TestGetVideosByCaption(t *testing.T) {
 		t.Run(fmt.Sprintf("case #%d", i), func(t *testing.T) {
 			t.Logf("caption substring: %s, expected resp code: %d", tc.CaptionSubstring, tc.ExpectedRespCode)
 
-			urlPath := fmt.Sprintf("/phone/%s", tc.CaptionSubstring)
+			urlPath := fmt.Sprintf("/videos/%s", tc.CaptionSubstring)
 			req, err := http.NewRequest("GET", urlPath, nil)
 			if err != nil {
 				t.Errorf("failed to create an http request: %v", err)
@@ -79,9 +79,9 @@ type dbMock struct {
 	videosToReturn    []*storage.FoundVideo
 }
 
-func (db *dbMock) GetVideosByCaption(ctx context.Context, prefix string) ([]*storage.FoundVideo, error) {
-	if prefix != db.expectedSubstring {
-		db.t.Errorf("error in DB mock: expected email prefix: %s, got: %s", db.expectedSubstring, prefix)
+func (db *dbMock) GetVideosByCaption(ctx context.Context, searchPhrase string) ([]*storage.FoundVideo, error) {
+	if searchPhrase != db.expectedSubstring {
+		db.t.Errorf("error in DB mock: expected search phrase: %s, got: %s", db.expectedSubstring, searchPhrase)
 		return nil, nil
 	}
 	return db.videosToReturn, db.expectedError

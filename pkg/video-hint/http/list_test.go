@@ -13,53 +13,53 @@ import (
 
 func TestGetVideosByCaption(t *testing.T) {
 	cases := []struct {
-		EmailPrefix      string
-		ExpectedPrefix   string
-		MockErr          error
-		ExpectedRespCode int
+		CaptionSubstring  string
+		ExpectedSubstring string
+		MockErr           error
+		ExpectedRespCode  int
 	}{
 		{
-			EmailPrefix:      "alidd",
-			ExpectedPrefix:   "alidd",
-			ExpectedRespCode: http.StatusOK,
+			CaptionSubstring:  "repudiandae",
+			ExpectedSubstring: "repudiandae",
+			ExpectedRespCode:  http.StatusOK,
 		},
 		{
-			EmailPrefix:      "ALidd",
-			ExpectedPrefix:   "alidd",
-			ExpectedRespCode: http.StatusOK,
+			CaptionSubstring:  "RepuDIandae",
+			ExpectedSubstring: "repudiandae",
+			ExpectedRespCode:  http.StatusOK,
 		},
 		{
-			EmailPrefix:      "",
+			CaptionSubstring: "",
 			ExpectedRespCode: http.StatusBadRequest,
 		},
 		{
-			EmailPrefix:      "alidd",
-			ExpectedPrefix:   "alidd",
-			MockErr:          fmt.Errorf("some err"),
-			ExpectedRespCode: http.StatusInternalServerError,
+			CaptionSubstring:  "alidd",
+			ExpectedSubstring: "alidd",
+			MockErr:           fmt.Errorf("some err"),
+			ExpectedRespCode:  http.StatusInternalServerError,
 		},
 	}
 
 	for i, tc := range cases {
 		t.Run(fmt.Sprintf("case #%d", i), func(t *testing.T) {
-			t.Logf("prefix: %s, expected resp code: %d", tc.EmailPrefix, tc.ExpectedRespCode)
+			t.Logf("caption substring: %s, expected resp code: %d", tc.CaptionSubstring, tc.ExpectedRespCode)
 
-			urlPath := fmt.Sprintf("/phone/%s", tc.EmailPrefix)
+			urlPath := fmt.Sprintf("/phone/%s", tc.CaptionSubstring)
 			req, err := http.NewRequest("GET", urlPath, nil)
 			if err != nil {
 				t.Errorf("failed to create an http request: %v", err)
 				return
 			}
 			req = req.WithContext(context.WithValue(req.Context(), storage.ContextKeyDB, &dbMock{
-				t:              t,
-				expectedPrefix: tc.ExpectedPrefix,
-				expectedError:  tc.MockErr,
-				phonesToReturn: nil,
+				t:                 t,
+				expectedSubstring: tc.CaptionSubstring,
+				expectedError:     tc.MockErr,
+				videosToReturn:    nil,
 			}))
 
 			handler := mux.NewRouter()
 			handler.HandleFunc(urlPath, func(w http.ResponseWriter, r *http.Request) {
-				GetVideosByCaption(w, r, tc.EmailPrefix)
+				GetVideosByCaption(w, r, tc.CaptionSubstring)
 			}).Methods("GET")
 			rr := httptest.NewRecorder()
 
@@ -73,18 +73,18 @@ func TestGetVideosByCaption(t *testing.T) {
 }
 
 type dbMock struct {
-	t              *testing.T
-	expectedPrefix string
-	expectedError  error
-	phonesToReturn []*storage.FoundVideo
+	t                 *testing.T
+	expectedSubstring string
+	expectedError     error
+	videosToReturn    []*storage.FoundVideo
 }
 
 func (db *dbMock) GetVideosByCaption(ctx context.Context, prefix string) ([]*storage.FoundVideo, error) {
-	if prefix != db.expectedPrefix {
-		db.t.Errorf("error in DB mock: expected email prefix: %s, got: %s", db.expectedPrefix, prefix)
+	if prefix != db.expectedSubstring {
+		db.t.Errorf("error in DB mock: expected email prefix: %s, got: %s", db.expectedSubstring, prefix)
 		return nil, nil
 	}
-	return db.phonesToReturn, db.expectedError
+	return db.videosToReturn, db.expectedError
 }
 
 func (db *dbMock) Close() {}

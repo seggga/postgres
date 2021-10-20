@@ -249,29 +249,23 @@ func TestGetVideosByCaption(t *testing.T) {
 		},
 	}
 
-	// todo скорректировать запрос для пополнения БД тестовыми данными
+	// todo скорректировать запрос для пополнения БД, наполненную тестовыми данными
 
 	batch := &pgx.Batch{}
-	const query = `INSERT INTO employees (caption, uri, location, ... email, salary, manager_id, department, position)
+	const query = `INSERT INTO videos (user_id, location, uri, res, caption, description, created_at, updated_at)
 		VALUES(
-			$1, $2, $3, $4, 
-			45000,
-			(SELECT id FROM employees WHERE first_name = 'Bob' AND last_name = 'Morane' LIMIT 1),
-			(SELECT id FROM departments WHERE name = 'R&D'),
-			(SELECT id FROM positions WHERE title = 'Backend Dev')
+			20, 
+			$1, $2 ,'240p', $3, 
+			'Tempore laborum deleniti et officia ab et omnis. Possimus perferendis maxime itaque in. Vel hic suscipit temporibus et accusamus odit.',
+			'1973-04-01 23:06:00',
+			'2007-07-03 19:57:54'
 		)`
 	for _, v := range videosForTest {
 		batch.Queue(
 			query,
-			v.Caption,
-			v.URI,
 			v.Location,
-			fmt.Sprintf(
-				"%s_%s%s@gopher_corp.com",
-				captionTestSubstring,
-				string(strings.ToLower(e.FirstName)[0]),
-				strings.ToLower(e.LastName),
-			),
+			v.URI,
+			v.Caption,
 		)
 	}
 	if _, err := conn.SendBatch(context.Background(), batch).Exec(); err != nil {
@@ -291,16 +285,16 @@ func TestGetVideosByCaption(t *testing.T) {
 	}
 
 	// todo попытаться понять, для чего вообще эти строки
-	sort.Slice(employees, func(i int, j int) bool {
-		return employees[i].FirstName < employees[j].FirstName
+	sort.Slice(videosForTest, func(i int, j int) bool {
+		return videosForTest[i].Caption < videosForTest[j].Caption
 	})
-	sort.Slice(phones, func(i int, j int) bool {
-		return phones[i].FirstName < phones[j].FirstName
+	sort.Slice(videos, func(i int, j int) bool {
+		return videos[i].Caption < videos[j].Caption
 	})
-	for i, e := range employees {
-		p := *phones[i]
-		if e != p {
-			t.Fatalf("expected object %v is not equal to the actual object %v", e, p)
+	for i, tst := range videosForTest {
+		v := *videos[i]
+		if tst != v {
+			t.Fatalf("expected object %v is not equal to the actual object %v", tst, v)
 		}
 	}
 }

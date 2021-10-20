@@ -1,5 +1,5 @@
 CREATE USER gotuber
-WITH PASSWORD 'P@ssw0rd';
+WITH PASSWORD 'Passw0rd';
 
 CREATE DATABASE go_tube
     WITH OWNER gotuber

@@ -1,132 +1,209 @@
 BEGIN;
 
-INSERT INTO positions (title)
-VALUES
-    ('CTO'),
-    ('CEO'),
-    ('CSO'),
-    ('Backend Dev'),
-    ('Frontend Dev'),
-    ('Fullstack Dev'),
-    ('QA'),
-    ('Technical writer')
-ON CONFLICT(title) DO NOTHING;
+INSERT INTO users (name, email, login, birthday) VALUES
+('Laron','feest.margaretta@example.net','reiciendis','2019-03-29'),
+('Maribel','guiseppe31@example.org','sequi','1977-06-27'),
+('Seth','deangelo.kilback@example.net','ducimus','1983-05-07'),
+('Gerry','xschneider@example.net','non','1989-11-04'),
+('Dorris','johns.fay@example.com','possimus','1996-01-07'),
+('Coy','hcummings@example.org','ad','2002-01-02'),
+('Georgette','brenden69@example.org','quo','1979-11-24'),
+('Pearline','ryleigh.terry@example.net','qui','1975-02-16'),
+('Josefa','elmore.orn@example.com','nesciunt','1987-04-23'),
+('Ulises','lonie.o''kon@example.org','eveniet','2003-10-13'),
+('Deanna','qreynolds@example.com','unde','1983-10-09'),
+('Yoshiko','joaquin.feeney@example.com','recusandae','1971-12-11'),
+('Lois','arely.hansen@example.org','id','1976-03-12'),
+('Felicity','maggio.manley@example.net','tempore','2016-07-07'),
+('Logan','ebatz@example.net','consequatur','1978-02-20'),
+('Zaria','name.predovic@example.net','in','2007-03-21'),
+('Hershel','newell32@example.net','itaque','2005-06-17'),
+('Mallory','njacobs@example.com','vel','1991-09-20'),
+('Madelyn','ghammes@example.net','temporibus','2003-03-15'),
+('Elisa','cindy.turner@example.com','sed','2001-06-06');
 
-INSERT INTO departments (id, parent_id, name)
-OVERRIDING SYSTEM VALUE
-VALUES
-    (0, 0, 'root') ON CONFLICT(id) DO NOTHING;
 
-INSERT INTO departments (parent_id, name)
-VALUES
-    (
-        (
-            SELECT id
-            FROM departments
-            WHERE name = 'root'
-        ),
-        'executives'
-    ),
-    (
-        (
-            SELECT id
-            FROM departments
-            WHERE name = 'root'
-        ),
-        'R&D'
-    ),
-    (
-        (
-            SELECT id
-            FROM departments
-            WHERE name = 'root'
-        ),
-        'Accounting'
-    ),
-    (
-        (
-            SELECT id
-            FROM departments
-            WHERE name = 'root'
-        ),
-        'Sales'
-    ) ON CONFLICT(name) DO NOTHING;
+INSERT INTO videos (user_id, location, uri, res, caption, description, created_at, updated_at) VALUES
+(11,'3g2.avi','http://crooks.com/','240p','Et exercitationem consequatur eos nulla praesentium quo et laborum.','Ea qui minus error eligendi. Est possimus voluptas ab autem qui beatae. Mollitia autem soluta illo expedita. Quia praesentium mollitia recusandae veniam.','2014-08-27 12:16:42','1974-12-24 07:44:19'),
+(10,'cgm.avi','http://bogisich.com/','720p','Et dolorem accusantium dignissimos eaque qui ipsam.','Ea rem quis aut veritatis et sed et. Laboriosam asperiores a omnis dolores fuga. Provident vitae qui reprehenderit quo voluptas. Qui dignissimos quasi qui at quae dolor.','1984-01-26 01:05:48','1986-11-16 22:20:13'),
+(3,'docx.avi','http://www.ziemann.com/','144p','Tempora ab totam sed in quia laborum quia.','Culpa aut commodi vero modi commodi aliquid. Enim dolores qui sapiente beatae doloremque. Sunt omnis et fuga nihil quia ut excepturi. Dolores consequatur quis rerum voluptas. Fugiat ratione et quae dolore dolore.','1998-01-19 16:06:47','2001-04-05 09:02:07'),
+(20,'dpg.avi','http://www.yostbins.biz/','240p','Delectus et quae officiis officia soluta.','Tempore laborum deleniti et officia ab et omnis. Possimus perferendis maxime itaque in. Vel hic suscipit temporibus et accusamus odit.','1973-04-01 23:06:00','2007-07-03 19:57:54'),
+(12,'dtd.avi','http://www.oberbrunner.com/','480p','Nobis nesciunt ea debitis.','Odit hic nostrum neque porro eum maiores harum. Harum fuga id tempore eum reprehenderit fugit error. Facilis fugit cupiditate at et dolorum quo ea.','2009-02-10 17:01:18','1984-07-23 21:05:38'),
+(18,'emma.avi','http://west.biz/','1080p','Dolorem ut voluptatibus molestiae reprehenderit maxime illum.','Magnam in accusantium qui non. Aspernatur maiores fugit qui. Itaque qui necessitatibus et incidunt iusto.','1980-05-07 02:23:33','1993-03-29 14:38:40'),
+(12,'fli.avi','http://www.doyle.com/','240p','Quo temporibus quo quia deleniti.','Ut blanditiis qui natus cum veritatis qui sunt harum. Error ut ipsa laborum rerum eos aliquam unde repudiandae. Qui sed totam qui molestias quae corporis qui.','1996-05-15 01:39:03','1979-12-21 17:49:09'),
+(13,'fst.avi','http://vandervort.com/','1080p','Autem repudiandae excepturi libero nisi qui voluptatem.','Voluptatem sint officiis illum aliquid. Qui autem earum veniam praesentium dolore iste eos. Sed harum reprehenderit deleniti at quibusdam sed. Omnis vel quo est et et qui ut omnis.','1997-03-11 06:17:02','1977-12-02 02:17:46'),
+(9,'gramps.avi','http://schillerbednar.com/','1080p','Ullam aut dolores facere maxime reiciendis provident debitis.','Eligendi et error numquam sint. Et consequatur culpa ut at recusandae et similique. Est molestiae reiciendis et. Quia rerum sed alias nam.','2007-09-09 05:04:02','2001-09-02 00:53:46'),
+(20,'h261.avi','http://gislasonmann.com/','480p','Est dolor quia voluptatibus consectetur.','Ipsum dolorum sed ut suscipit quia non. Sit quidem delectus dolor perspiciatis. Cum ut iste voluptatem illo laudantium delectus.','2008-05-17 17:52:40','2009-01-07 00:17:56'),
+(1,'hdf.avi','http://www.emard.biz/','360p','Ut omnis sed quis vitae assumenda voluptatum repudiandae maxime.','Nobis tenetur rerum dolor rerum ex alias labore aut. Et repellat assumenda voluptas asperiores. Quod rerum architecto sit et unde modi omnis. Inventore excepturi odit quis odio.','2017-06-20 15:27:13','1977-08-06 03:51:48'),
+(10,'ief.avi','http://fisherziemann.com/','720p','Repellat molestiae aut tenetur aspernatur quidem qui et.','Ipsum voluptates animi quis. Et itaque possimus laudantium dolores molestiae. Corrupti enim sit provident id.','2006-03-08 03:42:45','2015-11-25 15:23:53'),
+(16,'log.avi','http://www.howe.org/','360p','Nihil in id excepturi eum aut est quam illo.','Non et odit occaecati voluptatem ad tenetur. Voluptatem corporis suscipit facere repudiandae quasi non. Autem et placeat accusantium natus corporis. Nesciunt voluptas magni velit soluta possimus enim.','2021-01-15 11:29:43','1985-04-20 18:20:54'),
+(13,'m4v.avi','http://www.hodkiewicz.com/','1080p','Qui ut sapiente eum beatae.','Iure porro qui repellendus aut voluptatum cumque. Rerum ea deserunt eum voluptas dolor. Ea enim fugiat sint ut expedita.','2017-08-31 12:11:25','1985-04-26 21:50:57'),
+(2,'movie.avi','http://von.biz/','1080p','Et commodi voluptatem autem consequuntur ut nesciunt blanditiis.','Illum laboriosam ipsum dignissimos laudantium enim. Et praesentium sunt hic exercitationem. Numquam nam laudantium ut eos.','1980-06-02 04:25:33','2010-04-16 12:10:20'),
+(11,'mpe.avi','http://dibbert.com/','1080p','Omnis ut dolores quis beatae itaque.','Qui occaecati amet et non exercitationem quae. Voluptatem explicabo blanditiis similique ipsam excepturi cumque. Aspernatur possimus dolor quia.','2000-01-11 21:05:51','1999-04-09 06:43:02'),
+(11,'nsc.avi','http://gerlach.net/','240p','Adipisci omnis consequatur ullam.','Debitis voluptatum amet tempora doloribus error ad dolorum. Dolorum consequatur exercitationem deleniti aut consectetur rerum. Consequatur inventore est dolores sunt enim enim magni. Eius dolor qui dolorem cumque repellendus exercitationem dolor earum.','2007-01-14 13:01:58','2015-01-08 01:00:43'),
+(12,'ogv.avi','http://bosco.net/','720p','Fugiat distinctio ad consequatur debitis pariatur.','Veniam iusto eligendi autem laboriosam incidunt illum eius. Ad quis iusto consequatur pariatur modi dolores illum.','1991-06-23 21:02:08','2003-06-04 04:40:19'),
+(15,'oth.avi','http://www.torp.com/','360p','Dolorem totam atque quod quidem minus modi et.','Nulla nihil sapiente odit quisquam. Earum dolorem autem accusamus ipsum. Accusamus quia repudiandae ea consectetur dolorem sunt rerum eveniet.','1993-07-04 05:52:53','1998-03-21 15:23:09'),
+(14,'ott.avi','http://www.gerholdhermann.com/','144p','Ad consequuntur libero debitis est.','Optio voluptas libero accusantium id cum exercitationem non. Maiores iste ut explicabo quisquam. Rerum itaque est quia nisi. Architecto numquam ut eligendi eveniet qui.','2013-03-28 20:00:43','2014-04-15 05:53:56'),
+(20,'oxt.avi','http://towne.org/','144p','Sed et labore veritatis et dolorem nihil veritatis.','Ad et ex exercitationem consequatur necessitatibus inventore doloremque. Nobis enim perferendis reiciendis id architecto sapiente nulla. Est enim cum dolor laboriosam. Ut quia sit ab similique velit.','2000-02-23 14:09:17','2011-02-11 19:53:22'),
+(20,'prc.avi','http://www.bogan.com/','1080p','Porro voluptates animi omnis voluptatem voluptatem ut et.','Dolore temporibus officia consequatur laudantium. Placeat aut ullam et rerum. Rerum saepe qui quae fugiat voluptatem quos natus.','1991-11-06 17:57:28','2014-08-17 02:29:21'),
+(12,'ptid.avi','http://runolfsdottir.com/','1080p','Voluptate excepturi sit mollitia.','Amet ad sapiente rerum voluptas debitis et eveniet. Molestiae aut accusamus dolores voluptatem veritatis nisi iusto. Ex aut sed temporibus voluptas.','2011-12-21 18:52:22','1975-12-16 14:41:06'),
+(12,'pyv.avi','http://willms.org/','480p','Alias voluptates error consequatur sunt perferendis.','Quasi commodi omnis consequatur dolorem iusto. Vitae voluptas placeat rerum velit. Et omnis velit dicta quam. Adipisci autem porro occaecati qui quos.','1978-01-17 20:23:15','1991-10-15 22:51:44'),
+(14,'scm.avi','http://www.koch.org/','144p','Est dolorum ipsam eius.','In assumenda voluptas iure minima ea iure. Quo labore expedita beatae libero. Qui dignissimos pariatur soluta et temporibus distinctio nostrum. Laborum deleniti id autem voluptatem corporis a aspernatur. Exercitationem sit ea pariatur et.','2000-09-25 17:55:06','2018-02-06 10:07:02'),
+(8,'semf.avi','http://www.pacochaschulist.com/','1080p','Sunt consequatur non eos sed similique quia porro.','Excepturi mollitia soluta a perspiciatis eum. Quia placeat ut aut aspernatur. Eligendi aut vel qui mollitia quo quis non. Omnis recusandae dicta voluptas eos ut.','1991-04-05 02:02:46','2015-02-10 07:38:51'),
+(6,'sgi.avi','http://tremblay.com/','1080p','Mollitia voluptas minus ut et.','Aperiam nihil nulla dolorem nihil similique voluptate. Similique nisi qui ut reprehenderit est fuga laborum quidem. Dicta perferendis tempora soluta.','2003-04-14 19:08:10','2016-07-03 14:18:06'),
+(19,'sig.avi','http://ondrickaschimmel.org/','480p','Enim consequuntur consequuntur occaecati repudiandae amet amet similique.','Autem maxime voluptatum quaerat. Est sit quos repellat aliquid consectetur ut. Enim et itaque cumque maxime dolorem non et. Odit non aspernatur est doloribus.','1983-05-10 12:46:51','2018-03-11 08:51:17'),
+(9,'sql.avi','http://www.tromp.biz/','480p','Corrupti dolorem hic et recusandae non.','Debitis aut saepe neque. Quam modi atque sed sit.','1990-03-18 12:53:58','2008-03-30 23:04:22'),
+(2,'sv4crc.avi','http://oconner.biz/','480p','Incidunt voluptate quaerat architecto a cumque.','Modi et reiciendis fuga et. Dolore aut est voluptates asperiores. Non fugit aliquid distinctio quo atque rerum. Nostrum magnam provident vero sed unde atque.','1987-07-06 09:02:39','1970-03-22 22:01:57'),
+(8,'sxg.avi','http://www.wymankoelpin.org/','720p','Enim consectetur totam nobis veritatis blanditiis officia culpa nihil.','Quo facere quis cupiditate molestiae et. Atque nam laudantium aut ut. Quia qui et maiores porro ullam.','2008-08-18 22:52:19','2019-06-20 02:31:55'),
+(19,'sxi.avi','http://fay.biz/','240p','Alias et qui aliquam.','Omnis nam enim et autem. Consequatur facere voluptas et sint. Iure eligendi neque distinctio nihil repellendus corrupti qui. Dolorum eum explicabo deserunt consequatur eius.','2009-07-17 07:11:58','2016-06-30 14:43:47'),
+(9,'vob.avi','http://turner.com/','144p','Quia reiciendis magni aut cumque sunt non.','A sit in fugiat dolor. Nemo vero cumque enim eum voluptate. Optio consequuntur voluptas aut aperiam.','2016-08-28 09:48:23','2018-01-04 02:19:32'),
+(15,'vrml.avi','http://www.hammes.com/','720p','Odio velit sit voluptates odit sunt facere expedita.','Sit maxime voluptate sit libero porro doloremque. Id sed maxime quis ducimus atque amet omnis rerum. Consequatur nihil perspiciatis voluptatem enim nesciunt.','2018-12-27 18:05:17','2007-07-10 23:34:29'),
+(8,'webm.avi','http://hodkiewicz.net/','480p','Asperiores sed quaerat dolor optio.','Molestiae alias incidunt ipsum fugit recusandae blanditiis ea distinctio. Beatae omnis aut voluptates dolores fugiat aperiam. Dolores qui nihil vel consequatur quis quia ut ipsam.','2017-05-17 22:07:03','1994-02-21 03:34:58'),
+(9,'wrl.avi','http://greenholt.com/','240p','Sed numquam ut enim consequatur consequatur rerum consequatur.','Rem vitae nulla odit. Et quas provident iure voluptatem totam animi id. Inventore quas ab molestiae praesentium veniam.','1978-01-27 14:53:20','2017-09-20 16:00:36'),
+(14,'xdp.avi','http://www.kuvalis.com/','360p','Laboriosam blanditiis maiores et adipisci est ipsum voluptatem.','Repellat sunt sunt cupiditate rerum cum nisi. Exercitationem iste aut sit modi doloremque omnis natus. Numquam et iusto sed nulla eum illum.','2015-11-13 00:53:32','2009-02-27 12:27:02'),
+(8,'xfdf.avi','http://wintheiser.com/','720p','Vel nemo fugit dignissimos officiis ducimus voluptatem minima in.','Omnis maxime dolorem enim consequatur culpa hic. Repellat quis quasi laudantium expedita cupiditate. Aperiam aut aliquam omnis illum minima omnis.','1999-04-16 07:30:20','1999-08-15 13:47:46'),
+(9,'xlam.avi','http://senger.biz/','360p','Odio velit quod optio reiciendis eum nulla sit.','Quo quasi possimus eos. Libero delectus ex molestias sit assumenda dolor. Qui molestiae odio quidem esse est ratione amet. Pariatur quas libero nobis autem.','1974-05-07 03:14:44','2009-10-14 13:56:47'),
+(13,'xlf.avi','http://schinner.com/','720p','Non perspiciatis sint nihil autem suscipit recusandae.','Reiciendis consectetur aliquid rem alias aut laudantium omnis sint. Excepturi neque perspiciatis hic libero explicabo quos. Illum occaecati accusamus vero aliquam modi incidunt. Id nesciunt cumque quo voluptatem atque.','2018-03-04 15:06:41','2016-10-21 03:48:29');
 
-COMMIT;
 
-BEGIN DEFERRABLE;
-    INSERT INTO employees (first_name, last_name, phone, email, salary, manager_id, department, position)
-    VALUES
-        (
-            'Bob',
-            'Morane',
-            '+79231234567',
-            'bmorane@gopher_corp.com',
-            500000,
-            42,
-            (SELECT id FROM departments WHERE name = 'executives'),
-            (SELECT id FROM positions WHERE title = 'CSO')
-        );
-    UPDATE employees
-    SET manager_id = (
-        SELECT id
-        FROM employees
-        WHERE
-            first_name = 'Bob'
-            AND last_name = 'Morane'
-        LIMIT 1
-    )
-    WHERE
-        first_name = 'Bob'
-        AND last_name = 'Morane';
+INSERT INTO comments (user_id, video_id, body, created_at) VALUES
+(19,15,'Totam ipsum quidem corrupti dolorem odit nobis. Minus velit velit ipsum nesciunt. Error veritatis molestias vel. Molestiae placeat eum dolores excepturi excepturi.','1970-02-22 08:04:04'),
+(16,17,'Omnis est placeat consequatur atque nobis laboriosam. Temporibus doloremque est sed minima esse modi repellendus maiores. Et soluta consectetur voluptas perferendis ducimus architecto autem.','1990-12-15 19:00:24'),
+(18,21,'Explicabo animi rerum eos tempora dicta necessitatibus sunt odio. Eius facere fugiat porro nihil rerum quia dolorem voluptatum. Et quidem accusantium hic labore consequatur accusantium vitae. Deserunt recusandae libero et eveniet.','1990-01-07 06:02:13'),
+(16,12,'Voluptatem autem quo eligendi quod error. Aperiam quos dolore eos eos et. Repellendus consequatur sunt dolores commodi esse et dolorum.','2016-04-13 11:43:47'),
+(20,19,'Voluptatem eos qui ut voluptas repudiandae voluptate. Voluptas et dolore est voluptatem. Laudantium voluptatem earum iste enim sunt et exercitationem amet. Velit rerum molestias in nihil iusto.','1985-03-27 11:02:33'),
+(8,39,'Fugit et earum aut facere ut sunt. Minima minima est voluptatem iusto incidunt. Labore officia dolores non quo voluptates rerum. Consequuntur necessitatibus voluptas nihil.','1987-03-04 08:30:05'),
+(9,28,'Non consequatur et eius id sint omnis iusto eos. Placeat dicta aliquam sequi voluptatem consequatur repellat.','1989-07-27 06:37:44'),
+(9,15,'Eligendi maxime nisi incidunt sint non reprehenderit et est. Qui omnis deserunt voluptates laboriosam. Qui accusantium sint aliquid qui laudantium dolore. Dolorem non quaerat aut molestias iste.','1986-07-10 07:41:16'),
+(13,16,'Iure quis voluptas molestiae vel maiores. Nulla animi blanditiis sunt. Minus rem officia et sapiente. Fuga iusto dicta cum quo delectus illo consectetur.','1977-02-15 09:35:11'),
+(10,7,'Et laborum eligendi possimus minus fuga veritatis. Eum enim sequi consequatur qui sed aut ratione. Magni est molestiae dolorum repudiandae. Eligendi ut placeat voluptatibus impedit.','1996-10-04 14:16:13'),
+(1,34,'Ut doloribus vel laborum facilis. Ut temporibus aut ut provident qui omnis. Sit vitae autem animi ullam molestias quis ullam consectetur.','2000-05-26 16:12:09'),
+(19,29,'Fugit et cupiditate illum cupiditate iste sint. Harum dolorem architecto amet nihil quis eum. Nemo explicabo dolorem repellat et. Sapiente necessitatibus minima odit veniam.','2002-01-04 18:04:54'),
+(10,20,'Repellat incidunt consequatur culpa sunt facere. Voluptatem facilis quisquam consequatur et occaecati non.','1972-12-14 20:51:42'),
+(3,26,'Laboriosam fugit non non. Tempora nobis pariatur ex et. Provident ipsam accusamus iure accusantium vel itaque at. Et aut eum quas labore numquam.','1976-03-19 01:27:04'),
+(9,24,'Nam quo et corporis dolores voluptatem. Modi in atque voluptas sed. Minima harum et qui ab ut ex. Eum animi ab sit quo.','2006-02-13 18:07:31'),
+(18,4,'Dicta commodi omnis omnis cumque repellendus blanditiis. Delectus provident et in aspernatur animi qui asperiores. Voluptatem ex odit officiis cumque.','2020-04-06 01:16:01'),
+(16,13,'Sed a esse quas consectetur. Asperiores non eveniet hic quisquam omnis et. Doloribus debitis sint nemo provident distinctio inventore commodi accusamus. Voluptatem consequuntur quis quos.','2001-07-07 01:28:28'),
+(15,27,'Et dolor in possimus consequuntur alias. Consequatur ut optio ea consequatur. Ratione eum et dolores voluptas. Aperiam deleniti nobis quibusdam aut.','2010-01-21 01:11:35'),
+(1,23,'Porro odio deleniti quo in. Nisi commodi omnis nisi nam totam. Aut quasi soluta distinctio assumenda fuga.','2004-05-07 14:57:34'),
+(19,4,'Quasi consequatur voluptas dolorem voluptatibus. Quo consequatur cupiditate sit nemo laborum.','2013-02-01 07:22:56'),
+(11,22,'Non quia praesentium pariatur possimus ab tempore. Voluptatem dolor minima omnis quidem non repudiandae. Excepturi nihil tempora fugit veritatis sit officiis quae.','2012-01-24 17:50:14'),
+(3,22,'Corrupti fugit quia officia eius et omnis necessitatibus. Vel amet deserunt et eos dignissimos consequatur. Temporibus hic eaque placeat earum iusto. Voluptatem quae quo enim repellendus molestiae est.','2011-03-20 02:42:08'),
+(19,21,'Nulla voluptatem ea sapiente. Tempore aut aut aliquam esse. Perspiciatis in qui qui error.','1989-04-12 14:11:02'),
+(10,34,'Quia labore perferendis sapiente fugiat atque rerum. Quisquam saepe maxime expedita aspernatur. Consequatur doloremque fugit dolorum deleniti illo veniam sequi laudantium. Cupiditate ex eaque omnis maiores.','2019-08-12 07:51:24'),
+(6,16,'Veritatis voluptatem veritatis consectetur et. Quasi sint suscipit qui ut quasi non. Aut sit non asperiores neque iure. Rerum aut qui nisi id.','2001-03-09 03:30:44'),
+(19,1,'Pariatur iusto nihil ut non dignissimos adipisci eos. Laborum culpa dolor corrupti cum vel fugiat ipsa. Aperiam et id minus odit numquam est. Aut sint velit voluptates voluptas.','2010-05-14 09:20:20'),
+(10,2,'Architecto sed sint aliquam id reiciendis consequatur. Excepturi voluptas libero et qui non nulla ut.','1997-12-31 12:30:18'),
+(15,11,'Eveniet veniam dolores pariatur aperiam. Qui nisi nesciunt id. Voluptate autem delectus adipisci sunt id. Harum est inventore voluptas sit.','1998-02-12 19:07:36'),
+(1,8,'Qui illum nisi vel maiores. Asperiores fuga et a quidem. Asperiores quia molestias ex provident. Eaque praesentium eos ratione labore.','2018-06-14 00:53:52'),
+(14,24,'Aut veritatis autem quos possimus. Adipisci commodi in et. Quidem quas expedita aut dolor similique quas qui eos.','1995-12-23 00:44:43'),
+(7,15,'Optio quam dolorem omnis. Id ducimus laborum veritatis sunt. Culpa neque quia et suscipit.','2001-02-21 15:34:32'),
+(18,33,'Nostrum ipsa non iusto et. Quia enim omnis deleniti rerum. Quasi voluptatem quaerat aut dolores explicabo ut culpa. Illo quae aspernatur doloremque numquam architecto repellat voluptate sunt.','2000-05-01 21:17:55'),
+(9,26,'Architecto excepturi et suscipit rerum impedit blanditiis nihil ratione. Esse vitae id a eum in ipsa aut natus. Aspernatur iure omnis et animi sunt. Est nam ut quia dolores fugiat.','2011-02-02 04:06:44'),
+(7,36,'Reiciendis itaque quae repudiandae ipsum earum ab accusamus ratione. Culpa id dolorum minus voluptate nihil qui quia. Id recusandae id voluptas qui omnis laudantium molestias maxime. Quo aut in porro unde molestiae.','2017-10-16 00:24:36'),
+(17,2,'Molestias accusantium explicabo incidunt enim. Est omnis optio sit dolores provident minus perferendis. Eos porro illum et eius a sed pariatur.','1972-04-16 00:49:43'),
+(12,19,'Iure temporibus cumque corporis cupiditate. Perferendis ipsum neque dolores reprehenderit libero rerum quia. Eos molestiae aut alias consequatur.','1987-07-24 18:03:22'),
+(1,17,'Eaque magnam et sit iusto. Natus veniam dicta necessitatibus ipsum sed. Occaecati at ad vitae maiores qui corporis quasi. Laudantium velit omnis eligendi aut esse qui et.','1997-08-01 16:24:21'),
+(9,9,'Blanditiis eos in est ab. Expedita harum et accusantium quae numquam. Voluptate perspiciatis natus aut iste et. Ut reiciendis ex id voluptas.','1999-02-15 21:39:47'),
+(6,5,'Temporibus vitae sed eum repellendus et. Molestiae quo et aliquam excepturi dolores doloribus maiores. Nobis porro ad ullam vitae rerum reprehenderit repellendus. Facilis soluta omnis cumque ad illo dolor delectus.','1979-09-11 18:58:17'),
+(20,20,'Debitis natus quia culpa iure. Deleniti expedita esse porro placeat sequi. Aut repellendus sed doloribus totam impedit. Et non id et rerum quia fugiat.','2003-09-14 18:06:07'),
+(14,27,'Excepturi quam praesentium laboriosam vel iure dolores. At cumque doloribus quo molestiae vero rerum. Deleniti quia quod recusandae quia aut.','1975-01-24 23:25:59'),
+(4,20,'Quia laboriosam facilis omnis quas voluptatem explicabo. Porro est dolores vel qui aut atque aliquam. Est quam quasi repudiandae ipsum perspiciatis qui.','1985-11-06 16:56:16'),
+(17,34,'Quas aut quo sit doloribus itaque. Minus ducimus velit molestiae voluptas. Voluptatem omnis placeat nulla libero. Corrupti voluptatem saepe id tempore.','1991-06-15 16:15:05'),
+(17,29,'Rerum quia vero in aliquid officia ut eos. Ratione ea cum minima doloribus ut quia quis voluptatem. Asperiores ex assumenda nulla iure fugit eveniet.','1975-10-21 12:31:30'),
+(12,28,'At veritatis qui non consequatur impedit. Dolores eum qui ea exercitationem labore quod adipisci. Enim odit aut consequuntur ducimus enim pariatur eos deleniti.','1977-10-08 09:15:35'),
+(14,31,'Quia eligendi nulla aspernatur ea ad culpa sit ut. Nam ea non enim ut corporis delectus voluptatem doloremque. Cupiditate omnis non quo fugiat.','1982-06-25 00:08:12'),
+(14,8,'Voluptate est aut eaque tenetur labore. Sed ipsum temporibus eum incidunt qui voluptates. In autem enim inventore sit. Rerum sunt consequuntur et cumque dolor dolores rerum.','2018-02-18 20:57:09'),
+(11,39,'Sed temporibus facere ex officiis voluptas dolor ipsam asperiores. Possimus ut quia ab qui perspiciatis. Exercitationem omnis et autem exercitationem ut laborum veniam error. Perferendis nihil officiis rerum numquam.','1972-10-20 23:17:37'),
+(7,10,'Vero minus qui sit natus est necessitatibus optio dolores. Et aut magni exercitationem. Omnis aliquid et qui architecto expedita voluptatem in sed.','1974-07-17 01:37:08'),
+(2,28,'Ut quia occaecati esse id ut non officia iure. Ratione fugit voluptates et voluptas. Ut impedit itaque qui et ipsa.','1998-10-24 20:51:16'),
+(10,36,'Omnis illum necessitatibus ab voluptate. Enim et molestiae non sapiente voluptas voluptates. Totam nesciunt est fuga sed qui.','2001-12-09 05:21:44'),
+(16,20,'Voluptatum perspiciatis illo voluptatibus tempora dolor temporibus et. Dolorem ea maxime veritatis vitae quia dolores. Voluptas dolorem tenetur ut.','1972-03-29 14:21:05'),
+(14,11,'Ex voluptas quia dolores debitis modi. Cupiditate quia ut maiores vel aliquid. Autem iure cumque doloremque cum doloremque mollitia exercitationem.','1996-12-02 21:12:00'),
+(17,22,'Ad est beatae cupiditate ipsam deserunt temporibus. Reiciendis autem quia delectus fuga. Et molestiae perspiciatis placeat sed est.','1972-06-16 13:40:59'),
+(15,4,'Laborum repellat alias exercitationem modi ab laborum. Sunt nihil fuga quasi et voluptatem nostrum nesciunt. Ex et quo quia reiciendis quis aut non voluptas.','1996-09-18 16:36:00'),
+(1,19,'Nam unde dolore ut recusandae dolor sint. Illum consequatur animi sunt. Impedit molestiae ex nihil molestiae quia dolor sed.','1976-12-23 00:35:31'),
+(16,1,'Cum dolores id et sit quibusdam. Rerum sit ut rerum. Porro et qui dolorum quia sed in incidunt. Perspiciatis autem voluptas laboriosam et. Doloremque doloribus non cumque rem omnis.','1975-07-11 02:39:22'),
+(4,13,'Ea ut dolor et in ut ipsa laborum. Nobis consectetur ut libero recusandae temporibus. Voluptatem ipsa neque quo sit dolorum amet ducimus.','2010-08-25 11:00:22'),
+(5,20,'Voluptatem possimus dignissimos aliquam porro quia. Non praesentium molestias mollitia enim dignissimos eos sit optio. Pariatur distinctio dolorem aut aut atque laborum quasi.','1994-01-01 12:41:08'),
+(4,23,'Nemo commodi molestiae nemo. Quisquam sed quo ea. Sapiente doloribus deleniti sapiente et laborum. Deserunt accusantium dolorem laborum aspernatur aut sit. Ratione ex omnis ut id nostrum ex.','1997-10-14 07:40:21');
 
-    INSERT INTO employees (first_name, last_name, phone, email, salary, manager_id, department, position)
-    VALUES
-        (
-            'Charley',
-            'Bucket',
-            '+79159876543',
-            'cbucket@gopher_corp.com',
-            1000000,
-            42,
-            (SELECT id FROM departments WHERE name = 'executives'),
-            (SELECT id FROM positions WHERE title = 'CEO')
-        );
-    UPDATE employees
-    SET manager_id = (
-        SELECT id
-        FROM employees
-        WHERE
-            first_name = 'Charley'
-            AND last_name = 'Bucket'
-        LIMIT 1
-    )
-    WHERE
-        first_name = 'Charley'
-        AND last_name = 'Bucket';
 
-    INSERT INTO employees (first_name, last_name, phone, email, salary, manager_id, department, position)
-    VALUES
-        (
-            'Alice',
-            'Liddell',
-            '+79169008070',
-            'aliddell@gopher_corp.com',
-            500000,
-            42,
-            (SELECT id FROM departments WHERE name = 'executives'),
-            (SELECT id FROM positions WHERE title = 'CTO')
-        );
-    UPDATE employees
-    SET manager_id = (
-        SELECT id
-        FROM employees
-        WHERE
-            first_name = 'Alice'
-            AND last_name = 'Liddell'
-        LIMIT 1
-    )
-    WHERE
-        first_name = 'Alice'
-        AND last_name = 'Liddell';
+INSERT INTO likes (user_id, video_id, thumb_up) VALUES
+(5,3,false),
+(3,5,false),
+(4,37,true),
+(9,17,true),
+(15,25,false),
+(14,16,true),
+(8,4,false),
+(6,24,true),
+(10,19,true),
+(3,1,false),
+(16,27,false),
+(20,31,true),
+(18,28,true),
+(12,23,false),
+(2,5,true),
+(4,21,false),
+(4,18,false),
+(4,27,true),
+(7,33,false),
+(2,19,true),
+(16,8,true),
+(18,33,true),
+(5,27,false),
+(9,37,false),
+(11,27,false),
+(15,27,true),
+(13,32,true),
+(10,35,true),
+(20,11,false),
+(19,11,false),
+(1,14,false),
+(6,15,false),
+(7,30,false),
+(10,18,true),
+(20,6,false),
+(17,10,false),
+(13,4,false),
+(13,26,true),
+(14,23,false),
+(13,36,true),
+(10,5,false),
+(6,8,false),
+(14,22,false),
+(16,10,false),
+(17,29,false),
+(12,26,true),
+(3,31,false),
+(1,29,false),
+(12,25,false),
+(11,28,false),
+(16,19,false),
+(7,37,false),
+(14,2,false),
+(11,16,false),
+(7,29,false),
+(20,13,false),
+(10,16,true),
+(10,12,true),
+(7,25,false),
+(17,8,false),
+(11,18,true),
+(15,29,true),
+(16,33,true),
+(2,10,false),
+(20,20,false),
+(15,18,false),
+(12,40,false),
+(12,34,true),
+(19,24,false),
+(10,32,true),
+(5,1,false),
+(8,2,true),
+(8,38,true),
+(16,22,true),
+(3,11,false);
+
 COMMIT;

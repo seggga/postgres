@@ -24,11 +24,6 @@ func TestGetVideosByCaption(t *testing.T) {
 			ExpectedRespCode:  http.StatusOK,
 		},
 		{
-			CaptionSubstring:  "RepuDIandae",
-			ExpectedSubstring: "repudiandae",
-			ExpectedRespCode:  http.StatusOK,
-		},
-		{
 			CaptionSubstring: "",
 			ExpectedRespCode: http.StatusBadRequest,
 		},

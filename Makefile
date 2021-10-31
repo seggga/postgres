@@ -15,4 +15,14 @@ start:
 	export DB_NAME="go_tube" && \
 	~/pg-n-go/Serg_Kotovsky_5/hw5/service
 
+# start test functions
+.PHONY: test
+test:
+	go test ./... -count 1
+
+# start integration tests
+.PHONY: int
+int:
+	go test ./... -tags=integration_tests -v -count 1
+
 # .DEFAULT_GOAL := build
